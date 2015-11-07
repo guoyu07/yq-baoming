@@ -1,0 +1,21 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<!-- 一个包可以就是一个模块 -->
+	<package name="bm" extends="myInterceptor" namespace="/bm">
+		<action name="index" class="com.yq.bm.action.BaoMingAction">
+		    <result name="success">
+		        index.jsp
+		    </result>
+		</action>
+		
+		<action name="search" class="com.yq.bm.action.BaoMingListAction">
+		    <result name="success">
+		        bmlist.jsp
+		    </result>
+		</action>
+	</package>
+
+</struts>
