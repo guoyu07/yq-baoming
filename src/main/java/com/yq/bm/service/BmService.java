@@ -41,7 +41,7 @@ public class BmService {
 		if(Strings.isNullOrEmpty(suser)){
 			return baoMingDao.getPageList(pageIndex, pageSize, "order by id desc");
 		}else{
-			return baoMingDao.getPageList(pageIndex, pageSize, "order by id desc",new SqlParamBean("user_name", suser),new SqlParamBean("or","order_name", suser));
+			return baoMingDao.getPageList(pageIndex, pageSize, "order by id desc",new SqlParamBean("user_name", suser),new SqlParamBean("or","order_name", suser),new SqlParamBean("or","id_card", suser),new SqlParamBean("or","name", suser));
 		}
 	}
 	
