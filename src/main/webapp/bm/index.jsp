@@ -91,7 +91,7 @@ function AmendCity(ProvinceID,CityID,AreaID)
 <body bgcolor="#DDFFDD">
 <form method="post" action="index?status=1" name="Form" id="Form" onSubmit="return checkdate()">
 	<div align="center">
-	<p><b><font color="#FF0000" size="5">中国一川2015年会报名</font></b></p>
+	<p><b><font color="#FF0000" size="5">中国一川2016年会报名</font></b></p>
 	<table border="0" id="table1" height="445" width="666" cellspacing="1">
 	    <tr>
 			<td width="253" align="right">平台用户名：</td>
@@ -158,6 +158,22 @@ function AmendCity(ProvinceID,CityID,AreaID)
 			<td width="253" align="right">服装订购人：</td>
 			<td width="406" align="left"><input type="text" name="orderName" size="20" value="${orderName}" /><font color="#FF0000">***请认真填写，（写姓名）***</font></td>
 		</tr>
+		<!-- 
+		<tr>
+			<td width="253" align="right">所属vip：</td>
+			<td width="406" align="left"> <select name="upvip"  id="upvip">
+                      <option selected="selected" value="">==请选择==</option>
+                      <option value="1">1z***7a（吴润兰）</option>
+                      <option value="2">zl***8a（徐延福）</option>
+                      <option value="3">qa***3b（杨冰冰）</option>
+                      <option value="4">15***12（黄志成）</option>
+                      <option value="5">ly***7a（范丽香）</option>
+                      <option value="6">lz***7a（郑丽华）</option>
+                      <option value="7">qa***9a（夏笑美）</option>
+                      <option value="8">gy***3a（杨素萍）</option>
+                      <option value="9">zg***ce（陈文娟）</option>
+                    </select><font color="#FF0000">***请认真选择，确定后不可更改***</font></td>
+		</tr> -->
 		<tr>
 			<td width="253" align="right">联系手机：</td>
 			<td width="406" align="left"><input type="text" name="phone" size="20" value="${phone}" /></td>

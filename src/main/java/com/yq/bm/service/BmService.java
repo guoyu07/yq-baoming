@@ -34,14 +34,22 @@ public class BmService {
 	}
 	
 	
-	public IPage<Baoming> getBmPageList(String opPass,String suser,int pageIndex,int pageSize){
+	public IPage<Baoming> getBmPageList(String opPass,String suser,String sheng,int pageIndex,int pageSize){
 		if(Strings.isNullOrEmpty(opPass)||!opPass.equals("nhbm2016")){
 			throw new ServiceException(1, "操作密码不正确");
 		}
 		if(Strings.isNullOrEmpty(suser)){
-			return baoMingDao.getPageList(pageIndex, pageSize, "order by id desc");
+			if(Strings.isNullOrEmpty(sheng)){
+				return baoMingDao.getPageList(pageIndex, pageSize, "order by id desc");
+			}else{
+				return baoMingDao.getPageList(pageIndex, pageSize, "order by id desc",new SqlParamBean("sheng", sheng));
+			}
 		}else{
-			return baoMingDao.getPageList(pageIndex, pageSize, "order by id desc",new SqlParamBean("user_name", suser),new SqlParamBean("or","order_name", suser),new SqlParamBean("or","id_card", suser),new SqlParamBean("or","name", suser));
+			if(Strings.isNullOrEmpty(sheng)){
+				return baoMingDao.getPageList(pageIndex, pageSize, "order by id desc",new SqlParamBean("user_name", suser),new SqlParamBean("or","order_name", suser),new SqlParamBean("or","id_card", suser),new SqlParamBean("or","name", suser));
+			}else{
+				return baoMingDao.getPageList(pageIndex, pageSize, "order by id desc",new SqlParamBean("sheng", sheng),new SqlParamBean("and","user_name", suser),new SqlParamBean("or","order_name", suser),new SqlParamBean("or","id_card", suser),new SqlParamBean("or","name", suser));
+			}
 		}
 	}
 	

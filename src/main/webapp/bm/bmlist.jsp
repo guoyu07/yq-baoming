@@ -24,7 +24,13 @@ function openwindow(url) {
   <table border="1" width="100%" style="border-collapse: collapse" bordercolor="#006699" cellpadding="0" height="143">
     <tr>
       <td width="100%" height="26" bgcolor="#C3DAF9"> 
-      <p align="center"><form action="?status=1" method="post">操作密码: <input type="password" name="opPass" size="20" value="${opPass}" />搜索用户名或订购人或身份证号码或姓名<input type="text" name="suser" size="20" value="${suser}" /><input type="submit" name="b12" size="20" value="提交" /></form></p></td> 
+      <p align="center"><form action="?status=1" method="post">操作密码: <input type="password" name="opPass" size="20" value="${opPass}" />搜索用户名或订购人或身份证号码或姓名<input type="text" name="suser" size="20" value="${suser}" />
+      <select name="sheng"  id="sheng">
+                      <option <c:if test="${empty sheng }">selected= "selected"</c:if> value="">==不限制省份==</option>
+		<s:iterator var="data" value="provinceList">
+		                      <option value="${data.b}"  <c:if test="${data.b==sheng}">selected= "selected"</c:if>>${data.b}</option>
+		</s:iterator>
+                    </select><input type="submit" name="b12" size="20" value="提交" /></form></p></td> 
   </tr> 
    
  
@@ -92,7 +98,7 @@ function openwindow(url) {
                   <font color="#000000" size="2">
 					${data.time}</font></td>
              </s:iterator></table> 
-</div> <aldtags:pageTag para1="opPass" value1="${opPass}" para2="suser" value2="${suser}" para3="status" value3="1"/>
+</div> <aldtags:pageTag para1="opPass" value1="${opPass}" para2="suser" value2="${suser}" para3="status" value3="1" para4="sheng" value4="${sheng}"/>
 <p>　</td> 
   </tr> 
 </table> 

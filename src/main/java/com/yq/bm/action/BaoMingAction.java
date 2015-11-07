@@ -1,12 +1,9 @@
 package com.yq.bm.action;
 
-import java.util.Date;
 import java.util.List;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
-import com.yq.bm.bo.Baoming;
 import com.yq.bm.bo.Province;
-import com.yq.bm.dao.BaoMingDao;
 import com.yq.bm.dao.ProvinceDao;
 import com.yq.bm.service.BmService;
 import com.yq.common.action.ALDAdminActionSupport;
@@ -30,6 +27,7 @@ public class BaoMingAction extends ALDAdminActionSupport {
 	private String phone;
 	private String qq;
 	private String idCard;
+	private String upvip;
 	private List<Province> provinceList;
 	
 	private int status;
@@ -158,6 +156,13 @@ public class BaoMingAction extends ALDAdminActionSupport {
 
 	public int getStatus() {
 		return status;
+	}
+	public String getUpvip() {
+		return upvip;
+	}
+
+	public void setUpvip(String upvip) {
+		this.upvip = upvip;
 	}
 
 	public void setStatus(int status) {
