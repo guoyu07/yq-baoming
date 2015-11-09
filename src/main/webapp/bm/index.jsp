@@ -2,6 +2,7 @@
 <%@ include file="/common/taglib.jsp"%>
 <c:if test="${erroCodeNum==1}"><script language=javascript>alert('身份证号码无效！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2}"><script language=javascript>alert('该身份证号码【${idCard}】已提交过了！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==100}"><script language=javascript>alert('关键参数不能为空！请重新填写！');location.href='index';</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('提交成功！');location.href='index';</script></c:if>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -21,6 +22,7 @@ function checkdate()  {
   if (Form.phone.value=="") {      alert("请填入您的手机号码！");  Form.phone.focus();      return false;    } 
   if (Form.qq.value=="") {      alert("请填入您的qq号码！");  Form.qq.focus();      return false;    } 
   if (Form.idCard.value=="") {      alert("请填入您的身份证号码！");  Form.idCard.focus();      return false;    }
+  if (Form.upvip.value==0) {      alert("请选择您的所属vip！");  Form.upvip.focus();      return false;    }
 	return true;
 }  
 
@@ -158,22 +160,29 @@ function AmendCity(ProvinceID,CityID,AreaID)
 			<td width="253" align="right">服装订购人：</td>
 			<td width="406" align="left"><input type="text" name="orderName" size="20" value="${orderName}" /><font color="#FF0000">***请认真填写，（写姓名）***</font></td>
 		</tr>
-		<!-- 
+		
 		<tr>
 			<td width="253" align="right">所属vip：</td>
 			<td width="406" align="left"> <select name="upvip"  id="upvip">
-                      <option selected="selected" value="">==请选择==</option>
-                      <option value="1">1z***7a（吴润兰）</option>
-                      <option value="2">zl***8a（徐延福）</option>
-                      <option value="3">qa***3b（杨冰冰）</option>
-                      <option value="4">15***12（黄志成）</option>
-                      <option value="5">ly***7a（范丽香）</option>
-                      <option value="6">lz***7a（郑丽华）</option>
-                      <option value="7">qa***9a（夏笑美）</option>
-                      <option value="8">gy***3a（杨素萍）</option>
-                      <option value="9">zg***ce（陈文娟）</option>
+                      <option selected="selected" value="0">==请选择所属vip==</option>
+                      <option value="1">赵利明（北京）</option>
+                      <option value="2">赵杰（山西朔州）</option>
+                      <option value="3">郭银霞（山西大同）</option>
+                      <option value="4">刘美君（山东青岛）</option>
+                      <option value="5">李昆原（山东青岛）</option>
+                      <option value="6">李永利（山东德州）</option>
+                      <option value="7">祁敬哲（辽宁）</option>
+                      <option value="8">黄志成（福建）</option>
+                      <option value="9">齐爱绿（浙江温州）</option>
+                      <option value="10">董丽芬（浙江杭州）</option>
+                      <option value="11">刘昱君（河北唐山）</option>
+                      <option value="12">马京敏（石家庄）</option>
+                      <option value="13">李展开（广东）</option>
+                      <option value="14">张意社（上海）</option>
+                      <option value="15">吴成勤（内蒙古）</option>
+                      <option value="16">总部（未指定）</option>
                     </select><font color="#FF0000">***请认真选择，确定后不可更改***</font></td>
-		</tr> -->
+		</tr> 
 		<tr>
 			<td width="253" align="right">联系手机：</td>
 			<td width="406" align="left"><input type="text" name="phone" size="20" value="${phone}" /></td>

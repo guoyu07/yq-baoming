@@ -30,7 +30,27 @@ function openwindow(url) {
 		<s:iterator var="data" value="provinceList">
 		                      <option value="${data.b}"  <c:if test="${data.b==sheng}">selected= "selected"</c:if>>${data.b}</option>
 		</s:iterator>
-                    </select><input type="submit" name="b12" size="20" value="提交" /></form></p></td> 
+                    </select>
+        <select name="upvip"  id="upvip">
+                      <option selected="selected" value="0">==不限制所属vip==</option>
+                      <option value="1" <c:if test="${upvip==1}">selected= "selected"</c:if>>赵利明（北京）</option>
+                      <option value="2" <c:if test="${upvip==2}">selected= "selected"</c:if>>赵杰（山西朔州）</option>
+                      <option value="3" <c:if test="${upvip==3}">selected= "selected"</c:if>>郭银霞（山西大同）</option>
+                      <option value="4" <c:if test="${upvip==4}">selected= "selected"</c:if>>刘美君（山东青岛）</option>
+                      <option value="5" <c:if test="${upvip==5}">selected= "selected"</c:if>>李昆原（山东青岛）</option>
+                      <option value="6" <c:if test="${upvip==6}">selected= "selected"</c:if>>李永利（山东德州）</option>
+                      <option value="7" <c:if test="${upvip==7}">selected= "selected"</c:if>>祁敬哲（辽宁）</option>
+                      <option value="8" <c:if test="${upvip==8}">selected= "selected"</c:if>>黄志成（福建）</option>
+                      <option value="9" <c:if test="${upvip==9}">selected= "selected"</c:if>>齐爱绿（浙江温州）</option>
+                      <option value="10" <c:if test="${upvip==10}">selected= "selected"</c:if>>董丽芬（浙江杭州）</option>
+                      <option value="11" <c:if test="${upvip==11}">selected= "selected"</c:if>>刘昱君（河北唐山）</option>
+                      <option value="12" <c:if test="${upvip==12}">selected= "selected"</c:if>>马京敏（石家庄）</option>
+                      <option value="13" <c:if test="${upvip==13}">selected= "selected"</c:if>>李展开（广东）</option>
+                      <option value="14" <c:if test="${upvip==14}">selected= "selected"</c:if>>张意社（上海）</option>
+                      <option value="15" <c:if test="${upvip==15}">selected= "selected"</c:if>>吴成勤（内蒙古）</option>
+                      <option value="16" <c:if test="${upvip==16}">selected= "selected"</c:if>>总部（未指定）</option>
+                    </select>            
+                    <input type="submit" name="b12" size="20" value="提交" /></form></p></td> 
   </tr> 
    
  
@@ -63,6 +83,8 @@ function openwindow(url) {
                 <b>鞋码</b></td>
                               <td  align="center" height="28" bgcolor="#C3DAF9"> 
                 <b>订购人</b></td>
+                 <td  align="center" height="28" bgcolor="#C3DAF9"> 
+                <b>所属vip</b></td>
                               <td  align="center" height="28" bgcolor="#C3DAF9"> 
                 <b>提交时间</b></td>
               </tr>
@@ -94,11 +116,31 @@ function openwindow(url) {
                   <font color="#000000" size="2">
 					${data.shoesSize}</font></td><td valign="middle" align="center"> 
                   <font color="#000000" size="2">
-					${data.orderName}</font></td><td valign="middle" align="center"> 
+					${data.orderName}</font></td>
+					<td valign="middle" align="center"> 
+                  <font color="#000000" size="2">
+				  <c:if test="${data.upvip==1}">赵利明（北京）</c:if>
+				  <c:if test="${data.upvip==2}">赵杰（山西朔州）</c:if>
+				  <c:if test="${data.upvip==3}">郭银霞（山西大同）</c:if>
+				  <c:if test="${data.upvip==4}">刘美君（山东青岛）</c:if>
+				  <c:if test="${data.upvip==5}">李昆原（山东青岛）</c:if>
+				  <c:if test="${data.upvip==6}">李永利（山东德州）</c:if>
+				  <c:if test="${data.upvip==7}">祁敬哲（辽宁）</c:if>
+				  <c:if test="${data.upvip==8}">黄志成（福建）</c:if>
+				  <c:if test="${data.upvip==9}">齐爱绿（浙江温州）</c:if>
+				  <c:if test="${data.upvip==10}">董丽芬（浙江杭州）</c:if>
+				  <c:if test="${data.upvip==11}">刘昱君（河北唐山）</c:if>
+				  <c:if test="${data.upvip==12}">马京敏（石家庄）</c:if>
+				  <c:if test="${data.upvip==13}">李展开（广东）</c:if>
+				  <c:if test="${data.upvip==14}">张意社（上海）</c:if>
+				  <c:if test="${data.upvip==15}">吴成勤（内蒙古）</c:if>
+				  <c:if test="${data.upvip==16}">总部（未指定）</c:if>
+				  </font></td>
+					<td valign="middle" align="center"> 
                   <font color="#000000" size="2">
 					${data.time}</font></td>
              </s:iterator></table> 
-</div> <aldtags:pageTag para1="opPass" value1="${opPass}" para2="suser" value2="${suser}" para3="status" value3="1" para4="sheng" value4="${sheng}"/>
+</div> <aldtags:pageTag paraStr="opPass,${opPass},suser,${suser},status,1,sheng,${sheng},upvip,${upvip}"/>
 <p>　</td> 
   </tr> 
 </table> 

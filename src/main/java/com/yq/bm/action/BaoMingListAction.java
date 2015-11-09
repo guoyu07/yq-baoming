@@ -22,6 +22,7 @@ public class BaoMingListAction extends ALDAdminPageActionSupport<Baoming> {
 	private int status;
 	private List<Province> provinceList;
 	private String sheng;
+	private int upvip;
 	public String execute(){
 		ProvinceDao provinceDao = ServiceCacheFactory.getServiceCache().getService(ProvinceDao.class); 
 		provinceList = provinceDao.getProvinceList();
@@ -31,7 +32,8 @@ public class BaoMingListAction extends ALDAdminPageActionSupport<Baoming> {
 		}
 		BmService bmService = ServiceCacheFactory.getServiceCache().getService(BmService.class);
 		try {
-			 super.initPage(bmService.getBmPageList(opPass, suser,sheng, super.getToPage(), 50));
+//			suser = URLDecoder.decode(suser);
+			 super.initPage(bmService.getBmPageList(opPass, suser,sheng,upvip,super.getToPage(), 50));
 		} catch (ServiceException e) {
 			super.setErroCodeNum(e.getCode());
 		}
@@ -80,4 +82,15 @@ public class BaoMingListAction extends ALDAdminPageActionSupport<Baoming> {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+
+
+	public int getUpvip() {
+		return upvip;
+	}
+
+
+	public void setUpvip(int upvip) {
+		this.upvip = upvip;
+	}
+	
 }

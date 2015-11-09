@@ -21,6 +21,7 @@ public class Baoming{
 	private String idCard;
 	private Date time;
 	private String userName;
+	private Integer upvip;
 	public Integer getId() {
 		return id;
 	}
@@ -106,7 +107,7 @@ public class Baoming{
 		this.qu = qu;
 	}
 	public Baoming(String name, int sex, String sheng, String shi, String qu, String clothSize, String shoesSize,
-			String orderName, String phone, String qq, String idCard, Date time, String userName) {
+			String orderName, String phone, String qq, String idCard, Date time, String userName,int upvip) {
 		super();
 		this.name = name;
 		this.sex = sex;
@@ -121,9 +122,17 @@ public class Baoming{
 		this.idCard = idCard;
 		this.time = time;
 		this.userName = userName;
+		this.upvip = upvip;
 	}
 	public Baoming() {
 		super();
 	}
+	public Integer getUpvip() {
+		return upvip;
+	}
+	public void setUpvip(Integer upvip) {
+		this.upvip = upvip;
+	}
+	
 }
 

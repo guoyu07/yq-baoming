@@ -18,7 +18,7 @@ public class BmService {
 	
 	
 	public void addBaoMing(String name, int sex, String sheng, String shi, String qu, String clothSize, String shoesSize,
-			String orderName, String phone, String qq, String idCard,  String userName){
+			String orderName, String phone, String qq, String idCard,  String userName,int upvip){
 		
 		//检查身份证号码是否合格
 		String result = IDCardUtils.IDCardValidate(idCard);
@@ -29,28 +29,29 @@ public class BmService {
 		if(baomingTemp!=null){
 			throw new ServiceException(2, "身份证号码已提交");
 		}
-		Baoming baoming = new Baoming(name, sex, sheng, shi, qu, clothSize, shoesSize, orderName, phone, qq, idCard, new Date(), userName);
+		Baoming baoming = new Baoming(name, sex, sheng, shi, qu, clothSize, shoesSize, orderName, phone, qq, idCard, new Date(), userName,upvip);
 		baoMingDao.add(baoming);
 	}
 	
 	
-	public IPage<Baoming> getBmPageList(String opPass,String suser,String sheng,int pageIndex,int pageSize){
+	public IPage<Baoming> getBmPageList(String opPass,String suser,String sheng,int upvip,int pageIndex,int pageSize){
 		if(Strings.isNullOrEmpty(opPass)||!opPass.equals("nhbm2016")){
 			throw new ServiceException(1, "操作密码不正确");
 		}
-		if(Strings.isNullOrEmpty(suser)){
-			if(Strings.isNullOrEmpty(sheng)){
-				return baoMingDao.getPageList(pageIndex, pageSize, "order by id desc");
-			}else{
-				return baoMingDao.getPageList(pageIndex, pageSize, "order by id desc",new SqlParamBean("sheng", sheng));
-			}
-		}else{
-			if(Strings.isNullOrEmpty(sheng)){
-				return baoMingDao.getPageList(pageIndex, pageSize, "order by id desc",new SqlParamBean("user_name", suser),new SqlParamBean("or","order_name", suser),new SqlParamBean("or","id_card", suser),new SqlParamBean("or","name", suser));
-			}else{
-				return baoMingDao.getPageList(pageIndex, pageSize, "order by id desc",new SqlParamBean("sheng", sheng),new SqlParamBean("and","user_name", suser),new SqlParamBean("or","order_name", suser),new SqlParamBean("or","id_card", suser),new SqlParamBean("or","name", suser));
-			}
-		}
+//		if(Strings.isNullOrEmpty(suser)){
+//			if(Strings.isNullOrEmpty(sheng)){
+//				return baoMingDao.getPageList(pageIndex, pageSize, "order by id desc");
+//			}else{
+//				return baoMingDao.getPageList(pageIndex, pageSize, "order by id desc",new SqlParamBean("sheng", sheng));
+//			}
+//		}else{
+//			if(Strings.isNullOrEmpty(sheng)){
+//				return baoMingDao.getPageList(pageIndex, pageSize, "order by id desc",new SqlParamBean("user_name", suser),new SqlParamBean("or","order_name", suser),new SqlParamBean("or","id_card", suser),new SqlParamBean("or","name", suser));
+//			}else{
+//				return baoMingDao.getPageList(pageIndex, pageSize, "order by id desc",new SqlParamBean("sheng", sheng),new SqlParamBean("and","user_name", suser),new SqlParamBean("or","order_name", suser),new SqlParamBean("or","id_card", suser),new SqlParamBean("or","name", suser));
+//			}
+//		}
+		return baoMingDao.search(suser, sheng, upvip, pageIndex, pageSize);
 	}
 	
 	

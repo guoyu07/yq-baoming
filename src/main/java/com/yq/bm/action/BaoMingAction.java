@@ -2,6 +2,7 @@ package com.yq.bm.action;
 
 import java.util.List;
 
+import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.bm.bo.Province;
 import com.yq.bm.dao.ProvinceDao;
@@ -27,7 +28,7 @@ public class BaoMingAction extends ALDAdminActionSupport {
 	private String phone;
 	private String qq;
 	private String idCard;
-	private String upvip;
+	private Integer upvip;
 	private List<Province> provinceList;
 	
 	private int status;
@@ -39,9 +40,17 @@ public class BaoMingAction extends ALDAdminActionSupport {
 			return SUCCESS;
 		}
 		
+		if (Strings.isNullOrEmpty(name) || Strings.isNullOrEmpty(provinceName) || Strings.isNullOrEmpty(cityName)
+				|| Strings.isNullOrEmpty(areaName) || Strings.isNullOrEmpty(clothSize)
+				|| Strings.isNullOrEmpty(shoesSize) || Strings.isNullOrEmpty(orderName)
+				|| Strings.isNullOrEmpty(idCard)||upvip==0) {
+			super.setErroCodeNum(100);
+			return SUCCESS;
+		}
+		
 		BmService bmService = ServiceCacheFactory.getServiceCache().getService(BmService.class); 
 		try {
-			bmService.addBaoMing(name, sex, provinceName, cityName, areaName, clothSize, shoesSize, orderName, phone, qq, idCard,userName);
+			bmService.addBaoMing(name, sex, provinceName, cityName, areaName, clothSize, shoesSize, orderName, phone, qq, idCard,userName,upvip);
 		} catch (ServiceException e) {
 			super.setErroCodeNum(e.getCode());
 			return SUCCESS;
@@ -157,11 +166,13 @@ public class BaoMingAction extends ALDAdminActionSupport {
 	public int getStatus() {
 		return status;
 	}
-	public String getUpvip() {
+
+
+	public Integer getUpvip() {
 		return upvip;
 	}
 
-	public void setUpvip(String upvip) {
+	public void setUpvip(Integer upvip) {
 		this.upvip = upvip;
 	}
 
