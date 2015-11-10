@@ -19,6 +19,7 @@ public class BaoMingDao extends YqBmDaoBase<Baoming> {
 		if(!Strings.isNullOrEmpty(suser)){
 			sql = sql +" and (name='"+suser+"'"+" or id_card='"+suser+"'"+" or order_name='"+suser+"'"+" or user_name='"+suser+"'"+")";
 		}
+		sql = sql+" order by id desc";
 		return super.getJdbc().getListPage(sql, Baoming.class, null, pageSize, pageIndex);
 	}
 }
