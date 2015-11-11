@@ -21,7 +21,7 @@ public class BmService {
 			String orderName, String phone, String qq, String idCard,  String userName,int upvip){
 		
 		//检查身份证号码是否合格
-		String result = IDCardUtils.IDCardValidate(idCard);
+		String result = IDCardUtils.IDCardValidate(idCard.toLowerCase());
 		if(!Strings.isNullOrEmpty(result)){
 			throw new ServiceException(1, result);
 		}
