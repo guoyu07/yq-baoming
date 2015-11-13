@@ -16,6 +16,12 @@
 		        bmlist.jsp
 		    </result>
 		</action>
+		<action name="edit" class="com.yq.bm.action.BaoMingAction" method="edit">
+		    <result name="success">
+		        edit.jsp
+		    </result>
+		</action>		
+		
 	</package>
 
 </struts>

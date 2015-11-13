@@ -19,7 +19,7 @@ public class BmService {
 	
 	public void addBaoMing(String name, int sex, String sheng, String shi, String qu, String clothSize, String shoesSize,
 			String orderName, String phone, String qq, String idCard,  String userName,int upvip){
-		
+		idCard = idCard.trim();
 		//检查身份证号码是否合格
 		String result = IDCardUtils.IDCardValidate(idCard.toLowerCase());
 		if(!Strings.isNullOrEmpty(result)){
@@ -54,5 +54,51 @@ public class BmService {
 		return baoMingDao.search(suser, sheng, upvip, pageIndex, pageSize);
 	}
 	
+	/**
+	 * 获取单个
+	 * @param id
+	 * @return
+	 */
+	public Baoming get(int id){
+		return baoMingDao.get(new SqlParamBean("id", id));
+	}
+	/**
+	 * 更新
+	 * @param id
+	 * @param name
+	 * @param sex
+	 * @param sheng
+	 * @param shi
+	 * @param qu
+	 * @param clothSize
+	 * @param shoesSize
+	 * @param orderName
+	 * @param phone
+	 * @param qq
+	 * @param idCard
+	 * @param userName
+	 * @param upvip
+	 * @return
+	 */
+	public boolean update(int id,String name, int sex, String sheng, String shi, String qu, String clothSize, String shoesSize,String orderName, String phone, String qq, String idCard, String userName, int upvip) {
+		// 检查身份证号码是否合格
+		idCard = idCard.trim();
+		String result = IDCardUtils.IDCardValidate(idCard.toLowerCase());
+		if (!Strings.isNullOrEmpty(result)) {
+			throw new ServiceException(1, result);
+		}
+		Baoming bm = baoMingDao.get(new SqlParamBean("id", id));
+		if(!idCard.equals(bm.getIdCard())){
+			Baoming baomingTemp = baoMingDao.get(new SqlParamBean("id_card", idCard));
+			if (baomingTemp != null) {
+				throw new ServiceException(2, "身份证号码已提交");
+			}
+		}
+		baoMingDao.delete(new SqlParamBean("id", id));
+		Baoming baoming = new Baoming(name, sex, sheng, shi, qu, clothSize, shoesSize, orderName, phone, qq, idCard,
+				bm.getTime(), userName, upvip);
+		baoming.setId(id);
+		return baoMingDao.add(baoming);
+	}
 	
 }

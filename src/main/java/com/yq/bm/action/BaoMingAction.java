@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.yq.bm.bo.Baoming;
 import com.yq.bm.bo.Province;
 import com.yq.bm.dao.ProvinceDao;
 import com.yq.bm.service.BmService;
@@ -52,6 +53,38 @@ public class BaoMingAction extends ALDAdminActionSupport {
 		try {
 			bmService.addBaoMing(name, sex, provinceName, cityName, areaName, clothSize, shoesSize, orderName, phone, qq, idCard,userName,upvip);
 		} catch (ServiceException e) {
+			super.setErroCodeNum(e.getCode());
+			return SUCCESS;
+		}
+		super.setErroCodeNum(2000);
+		return SUCCESS;
+	}
+	
+	private int id;
+	private Baoming data;
+	public String edit(){
+		BmService bmService = ServiceCacheFactory.getServiceCache().getService(BmService.class); 
+		data = bmService.get(id);
+		if(status==0){
+			ProvinceDao provinceDao = ServiceCacheFactory.getServiceCache().getService(ProvinceDao.class); 
+			provinceList = provinceDao.getProvinceList();
+			return SUCCESS;
+		}
+		if (Strings.isNullOrEmpty(name) || Strings.isNullOrEmpty(provinceName) || Strings.isNullOrEmpty(cityName)
+				|| Strings.isNullOrEmpty(areaName) || Strings.isNullOrEmpty(orderName)||Strings.isNullOrEmpty(clothSize)
+				|| Strings.isNullOrEmpty(shoesSize)
+				|| Strings.isNullOrEmpty(idCard)||upvip==0) {
+			super.setErroCodeNum(100);
+			return SUCCESS;
+		}
+		if(provinceName.equals("0")||cityName.equals("0")||areaName.equals("0")){
+			provinceName = data.getSheng();
+			cityName = data.getShi();
+			areaName = data.getQu();
+		}
+		try {
+		bmService.update(id, name, sex, provinceName, cityName, areaName, clothSize, shoesSize, orderName, phone, qq, idCard,userName,upvip);
+		}catch (ServiceException e) {
 			super.setErroCodeNum(e.getCode());
 			return SUCCESS;
 		}
@@ -179,4 +212,21 @@ public class BaoMingAction extends ALDAdminActionSupport {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Baoming getData() {
+		return data;
+	}
+
+	public void setData(Baoming data) {
+		this.data = data;
+	}
+
 }

@@ -91,7 +91,7 @@ function openwindow(url) {
               <s:iterator var="data" value="dataList">
               <tr> 
                 <td valign="middle" height="23" align="center"> 
-                  <p><font color="#000000" size="2">${data.id} 
+                  <p><font color="#000000" size="2"><a target="_blank" href="edit?id=${data.id}">${data.id}</a> 
                 </font> 
                 </td>
                 <td valign="middle"  align="center"> 
