@@ -49,7 +49,12 @@ function openwindow(url) {
                       <option value="14" <c:if test="${upvip==14}">selected= "selected"</c:if>>张意社（上海）</option>
                       <option value="15" <c:if test="${upvip==15}">selected= "selected"</c:if>>吴成勤（内蒙古）</option>
                       <option value="16" <c:if test="${upvip==16}">selected= "selected"</c:if>>总部（未指定）</option>
-                    </select>            
+                    </select>
+                   <select name="st"  id="st">
+                      <option selected="selected" value="0">==不限制是否删除==</option>
+                      <option value="1" <c:if test="${st==1}">selected= "selected"</c:if>>只看删除</option>
+                      <option value="2" <c:if test="${st==2}">selected= "selected"</c:if>>只看未删除</option>
+                    </select>                       
                     <input type="submit" name="b12" size="20" value="提交" /></form></p></td> 
   </tr> 
    
@@ -91,8 +96,22 @@ function openwindow(url) {
               <s:iterator var="data" value="dataList">
               <tr> 
                 <td valign="middle" height="23" align="center"> 
-                  <p><font color="#000000" size="2"><a target="_blank" href="edit?id=${data.id}">${data.id}</a> 
-                </font> 
+                  <p>
+                  <c:if test="${data.status!=0||not empty data.editName}">
+                    <c:set var="color" value="#FF0000"></c:set>
+                  </c:if>
+                   <c:if test="${data.status==0&&empty data.editName}">
+                    <c:set var="color" value="##000000"></c:set>
+                  </c:if>
+                  
+                  <c:set var="str" value=""></c:set>
+                   <c:if test="${not empty data.editName}">
+                        <c:set var="str" value="改"></c:set>
+                    </c:if>
+                    <c:if test="${data.status!=0}">
+                        <c:set var="str" value="删"></c:set>
+                    </c:if>
+<a target="_blank" href="edit?id=${data.id}">${data.id}</a><font color="${color}" size="2">${str}</font>
                 </td>
                 <td valign="middle"  align="center"> 
                   <p><font color="#000000" size="2"> 
@@ -107,7 +126,7 @@ function openwindow(url) {
                   <font size="2">　${data.idCard}</font></td>
                 <td valign="middle" align="center" > 
                   <font color="#000000" size="2">
-					${data.sheng}${data.shi}${data.qu}</font></td>
+					${data.sheng} <c:if test="${data.status!=0}"><font color="#FF0000">（已删除/删除人）</font></c:if><c:if test="${data.status==0}">${data.shi}${data.qu}</c:if></font></td>
 					<td valign="middle" align="center"> 
                   <font color="#000000" size="2">
 					${data.phone}</font></td><td valign="middle" align="center"> 
@@ -140,7 +159,7 @@ function openwindow(url) {
                   <font color="#000000" size="2">
 					${data.time}</font></td>
              </s:iterator></table> 
-</div> <aldtags:pageTag paraStr="opPass,${opPass},suser,${suser},status,1,sheng,${sheng},upvip,${upvip}"/>
+</div> <aldtags:pageTag paraStr="opPass,${opPass},suser,${suser},status,1,sheng,${sheng},upvip,${upvip},st,${st}"/>
 <p>　</td> 
   </tr> 
 </table> 

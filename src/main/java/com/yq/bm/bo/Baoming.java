@@ -22,11 +22,34 @@ public class Baoming{
 	private Date time;
 	private String userName;
 	private Integer upvip;
+	private int status;
+	private String editName;
+	private Date editTime;
+	private String deleteName;
+	private String recoverName;
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public String getEditName() {
+		return editName;
+	}
+	public void setEditName(String editName) {
+		this.editName = editName;
+	}
+	public Date getEditTime() {
+		return editTime;
+	}
+	public void setEditTime(Date editTime) {
+		this.editTime = editTime;
 	}
 	public String getName() {
 		return name;
@@ -133,6 +156,17 @@ public class Baoming{
 	public void setUpvip(Integer upvip) {
 		this.upvip = upvip;
 	}
-	
+	public String getDeleteName() {
+		return deleteName;
+	}
+	public void setDeleteName(String deleteName) {
+		this.deleteName = deleteName;
+	}
+	public String getRecoverName() {
+		return recoverName;
+	}
+	public void setRecoverName(String recoverName) {
+		this.recoverName = recoverName;
+	}
 }
 

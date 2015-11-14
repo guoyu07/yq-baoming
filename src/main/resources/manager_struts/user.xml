@@ -21,7 +21,11 @@
 		        edit.jsp
 		    </result>
 		</action>		
-		
+	    <action name="delete" class="com.yq.bm.action.BaoMingAction" method="delete">
+		    <result name="success">
+		        edit.jsp
+		    </result>
+		</action>			
 	</package>
 
 </struts>

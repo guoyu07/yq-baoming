@@ -32,6 +32,7 @@ public class BaoMingAction extends ALDAdminActionSupport {
 	private Integer upvip;
 	private List<Province> provinceList;
 	
+	
 	private int status;
 	
 	public String execute(){
@@ -62,18 +63,27 @@ public class BaoMingAction extends ALDAdminActionSupport {
 	
 	private int id;
 	private Baoming data;
+	private String editName;
+	private String opPa;
+	
 	public String edit(){
 		BmService bmService = ServiceCacheFactory.getServiceCache().getService(BmService.class); 
+		
 		data = bmService.get(id);
 		if(status==0){
 			ProvinceDao provinceDao = ServiceCacheFactory.getServiceCache().getService(ProvinceDao.class); 
 			provinceList = provinceDao.getProvinceList();
 			return SUCCESS;
 		}
+		
+		if(!opPa.equals("nhbm2016gai")){
+			super.setErroCodeNum(3);
+			return SUCCESS;
+		}
 		if (Strings.isNullOrEmpty(name) || Strings.isNullOrEmpty(provinceName) || Strings.isNullOrEmpty(cityName)
 				|| Strings.isNullOrEmpty(areaName) || Strings.isNullOrEmpty(orderName)||Strings.isNullOrEmpty(clothSize)
 				|| Strings.isNullOrEmpty(shoesSize)
-				|| Strings.isNullOrEmpty(idCard)||upvip==0) {
+				|| Strings.isNullOrEmpty(idCard)||upvip==0||Strings.isNullOrEmpty(editName)) {
 			super.setErroCodeNum(100);
 			return SUCCESS;
 		}
@@ -83,13 +93,47 @@ public class BaoMingAction extends ALDAdminActionSupport {
 			areaName = data.getQu();
 		}
 		try {
-		bmService.update(id, name, sex, provinceName, cityName, areaName, clothSize, shoesSize, orderName, phone, qq, idCard,userName,upvip);
+		bmService.update(id, name, sex, provinceName, cityName, areaName, clothSize, shoesSize, orderName, phone, qq, idCard,userName,upvip,editName);
 		}catch (ServiceException e) {
 			super.setErroCodeNum(e.getCode());
 			return SUCCESS;
 		}
 		super.setErroCodeNum(2000);
 		return SUCCESS;
+	}
+    private int st;
+    private String deleteName;
+    private String recoverName;
+	public String delete(){
+		if(!opPa.equals("nhbm2016gai")){
+			super.setErroCodeNum(3);
+			return SUCCESS;
+		}
+		BmService bmService = ServiceCacheFactory.getServiceCache().getService(BmService.class); 
+		bmService.delete(id,st,deleteName,recoverName);
+		if(st==1){
+			super.setErroCodeNum(2001);
+		}else{
+			super.setErroCodeNum(2002);
+		}
+		
+		return SUCCESS;
+	}
+	
+	public String getDeleteName() {
+		return deleteName;
+	}
+
+	public void setDeleteName(String deleteName) {
+		this.deleteName = deleteName;
+	}
+
+	public String getRecoverName() {
+		return recoverName;
+	}
+
+	public void setRecoverName(String recoverName) {
+		this.recoverName = recoverName;
 	}
 
 	public String getName() {
@@ -229,4 +273,25 @@ public class BaoMingAction extends ALDAdminActionSupport {
 		this.data = data;
 	}
 
+	public String getEditName() {
+		return editName;
+	}
+
+	public void setEditName(String editName) {
+		this.editName = editName;
+	}
+
+	public String getOpPa() {
+		return opPa;
+	}
+
+	public void setOpPa(String opPa) {
+		this.opPa = opPa;
+	}
+	public int getSt() {
+		return st;
+	}
+	public void setSt(int st) {
+		this.st = st;
+	}
 }

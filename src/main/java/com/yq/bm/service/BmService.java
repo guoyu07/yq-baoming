@@ -33,8 +33,8 @@ public class BmService {
 		baoMingDao.add(baoming);
 	}
 	
-	
-	public IPage<Baoming> getBmPageList(String opPass,String suser,String sheng,int upvip,int pageIndex,int pageSize){
+	//st 0全部   1只看删除  2 只看未删除
+	public IPage<Baoming> getBmPageList(String opPass,String suser,String sheng,int upvip,int st,int pageIndex,int pageSize){
 		if(Strings.isNullOrEmpty(opPass)||!opPass.equals("nhbm2016")){
 			throw new ServiceException(1, "操作密码不正确");
 		}
@@ -51,7 +51,7 @@ public class BmService {
 //				return baoMingDao.getPageList(pageIndex, pageSize, "order by id desc",new SqlParamBean("sheng", sheng),new SqlParamBean("and","user_name", suser),new SqlParamBean("or","order_name", suser),new SqlParamBean("or","id_card", suser),new SqlParamBean("or","name", suser));
 //			}
 //		}
-		return baoMingDao.search(suser, sheng, upvip, pageIndex, pageSize);
+		return baoMingDao.search(suser, sheng, upvip, st,pageIndex, pageSize);
 	}
 	
 	/**
@@ -80,7 +80,7 @@ public class BmService {
 	 * @param upvip
 	 * @return
 	 */
-	public boolean update(int id,String name, int sex, String sheng, String shi, String qu, String clothSize, String shoesSize,String orderName, String phone, String qq, String idCard, String userName, int upvip) {
+	public boolean update(int id,String name, int sex, String sheng, String shi, String qu, String clothSize, String shoesSize,String orderName, String phone, String qq, String idCard, String userName, int upvip,String editName) {
 		// 检查身份证号码是否合格
 		idCard = idCard.trim();
 		String result = IDCardUtils.IDCardValidate(idCard.toLowerCase());
@@ -97,8 +97,32 @@ public class BmService {
 		baoMingDao.delete(new SqlParamBean("id", id));
 		Baoming baoming = new Baoming(name, sex, sheng, shi, qu, clothSize, shoesSize, orderName, phone, qq, idCard,
 				bm.getTime(), userName, upvip);
+		baoming.setEditName(editName);
+		baoming.setEditTime(new Date());
 		baoming.setId(id);
 		return baoMingDao.add(baoming);
+	}
+	
+	/**
+	 * 更新状态
+	 * @param id
+	 * @return
+	 */
+	public boolean delete(int id,int st,String deleteName,String recoverName){
+		Baoming bm = baoMingDao.get(new SqlParamBean("id", id));
+		if(bm==null){
+			return false;
+		}
+		baoMingDao.delete(new SqlParamBean("id", id));
+		bm.setStatus(st);
+		if(st==0){
+			bm.setRecoverName(recoverName);
+		}
+		if(st==1){
+			bm.setDeleteName(deleteName);
+		}
+		bm.setEditTime(new Date());
+		return baoMingDao.add(bm);
 	}
 	
 }
