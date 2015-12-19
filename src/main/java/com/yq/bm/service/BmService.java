@@ -125,4 +125,8 @@ public class BmService {
 		return baoMingDao.add(bm);
 	}
 	
+	public int getCount(){
+		return baoMingDao.getCount();
+	}
+	
 }

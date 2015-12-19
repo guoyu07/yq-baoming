@@ -3,6 +3,8 @@
 <c:if test="${erroCodeNum==1}"><script language=javascript>alert('身份证号码无效！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2}"><script language=javascript>alert('该身份证号码【${idCard}】已提交过了！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==100}"><script language=javascript>alert('关键参数不能为空！请重新填写！');location.href='index';</script></c:if>
+<c:if test="${erroCodeNum==101}"><script language=javascript>alert('时间已截止，报名已结束！');location.href='empty.jsp';</script></c:if>
+<c:if test="${erroCodeNum==102}"><script language=javascript>alert('人数已满,报名已结束！');location.href='empty.jsp';</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('提交成功！');location.href='index';</script></c:if>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

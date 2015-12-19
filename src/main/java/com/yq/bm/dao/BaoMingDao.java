@@ -29,4 +29,10 @@ public class BaoMingDao extends YqBmDaoBase<Baoming> {
 		sql = sql+" order by id desc";
 		return super.getJdbc().getListPage(sql, Baoming.class, null, pageSize, pageIndex);
 	}
+	
+	
+	public int getCount(){
+		String sql = "select count(*) from "+super.getTable();
+		return super.getJdbc().getInt(sql, null);
+	}
 }

@@ -1,5 +1,6 @@
 package com.yq.bm.action;
 
+import java.util.Date;
 import java.util.List;
 
 import com.google.common.base.Strings;
@@ -10,6 +11,8 @@ import com.yq.bm.dao.ProvinceDao;
 import com.yq.bm.service.BmService;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.common.exception.ServiceException;
+import com.yq.common.utils.DateStyle;
+import com.yq.common.utils.DateUtils;
 
 public class BaoMingAction extends ALDAdminActionSupport {
 
@@ -36,6 +39,20 @@ public class BaoMingAction extends ALDAdminActionSupport {
 	private int status;
 	
 	public String execute(){
+		Date now = new Date();
+		Date start = DateUtils.StringToDate("2015-12-20 00:00:00", DateStyle.YYYY_MM_DD_HH_MM_SS);
+		Date end = DateUtils.StringToDate("2015-12-20 23:59:59", DateStyle.YYYY_MM_DD_HH_MM_SS);
+		if(now.getTime()<start.getTime()||now.getTime()>end.getTime()){
+			super.setErroCodeNum(101);
+			return SUCCESS;
+		}
+		BmService bmService = ServiceCacheFactory.getServiceCache().getService(BmService.class); 
+		if(bmService.getCount()>=18000){
+//		if(bmService.getCount()>3){
+			super.setErroCodeNum(102);
+			return SUCCESS;
+		}
+		
 		if(status==0){
 			ProvinceDao provinceDao = ServiceCacheFactory.getServiceCache().getService(ProvinceDao.class); 
 			provinceList = provinceDao.getProvinceList();
@@ -50,7 +67,7 @@ public class BaoMingAction extends ALDAdminActionSupport {
 			return SUCCESS;
 		}
 		
-		BmService bmService = ServiceCacheFactory.getServiceCache().getService(BmService.class); 
+		
 		try {
 			bmService.addBaoMing(name, sex, provinceName, cityName, areaName, clothSize, shoesSize, orderName, phone, qq, idCard,userName,upvip);
 		} catch (ServiceException e) {
