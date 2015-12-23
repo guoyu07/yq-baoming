@@ -47,7 +47,7 @@ public class BaoMingAction extends ALDAdminActionSupport {
 			return SUCCESS;
 		}
 		BmService bmService = ServiceCacheFactory.getServiceCache().getService(BmService.class); 
-		if(bmService.getCount()>=18000){
+		if(bmService.getCount()>=17300){
 //		if(bmService.getCount()>3){
 			super.setErroCodeNum(102);
 			return SUCCESS;
